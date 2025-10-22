@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Energy Evolution Lab</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="particles"></div>
+
+    <main class="app">
+      <!-- MENU -->
+      <section id="menu" class="screen active">
+        <div class="menu-card">
+          <header class="menu-header">
+            <h1 class="game-title">
+              ENERGY <span>E V O L U T I O N</span> LAB
+            </h1>
+            <p class="subtitle">
+              Explore the power of energy transformation — quick, playful &
+              scientific
+            </p>
+          </header>
+
+          <div class="menu-body">
+            <div class="characters">
+              <div class="char-card selected" data-char="male" id="char-male">
+                <!-- anime style male SVG (simple, inline) -->
+                <svg
+                  viewBox="0 0 160 160"
+                  class="char-svg"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden
+                >
+                  <defs>
+                    <linearGradient id="mg1" x1="0" x2="1">
+                      <stop offset="0" stop-color="#7ee0ff" />
+                      <stop offset="1" stop-color="#2ef0b2" />
+                    </linearGradient>
+                  </defs>
+                  <rect rx="12" width="160" height="160" fill="#07121a" />
+                  <g transform="translate(20,18)">
+                    <circle cx="40" cy="30" r="26" fill="#ffd9c7" />
+                    <path d="M10 68 q30 22 60 0" fill="#093"></path>
+                    <rect
+                      x="4"
+                      y="74"
+                      rx="8"
+                      width="72"
+                      height="46"
+                      fill="#0b2130"
+                    />
+                    <path
+                      d="M22 16 q18 -12 36 0"
+                      fill="url(#mg1)"
+                      opacity="0.18"
+                    />
+                  </g>
+                </svg>
+                <div class="char-name">Kai (Male)</div>
+              </div>
+
+              <div class="char-card" data-char="female" id="char-female">
+                <!-- anime style female SVG -->
+                <svg
+                  viewBox="0 0 160 160"
+                  class="char-svg"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden
+                >
+                  <defs>
+                    <linearGradient id="mg2" x1="0" x2="1">
+                      <stop offset="0" stop-color="#ff88d1" />
+                      <stop offset="1" stop-color="#7ee0ff" />
+                    </linearGradient>
+                  </defs>
+                  <rect rx="12" width="160" height="160" fill="#07121a" />
+                  <g transform="translate(20,18)">
+                    <circle cx="40" cy="30" r="26" fill="#ffdfd2" />
+                    <path d="M6 62 q30 26 64 0" fill="#112"></path>
+                    <rect
+                      x="4"
+                      y="74"
+                      rx="8"
+                      width="72"
+                      height="46"
+                      fill="#0b2030"
+                    />
+                    <path
+                      d="M16 12 q18 -12 36 0"
+                      fill="url(#mg2)"
+                      opacity="0.15"
+                    />
+                  </g>
+                </svg>
+                <div class="char-name">Mira (Female)</div>
+              </div>
+            </div>
+
+            <div class="player-setup">
+              <label class="lbl">Player Name</label>
+              <input
+                id="player-name"
+                type="text"
+                placeholder="e.g. Dr. Nova"
+                maxlength="22"
+              />
+
+              <div class="menu-actions">
+                <button id="open-settings" class="btn ghost">Settings</button>
+                <button id="open-credits" class="btn ghost">Credits</button>
+                <button id="start" class="btn primary">Start ▶</button>
+              </div>
+            </div>
+          </div>
+
+          <footer class="menu-footer">
+            <div class="quick-info">
+              <span class="info-pill">10 Q / round</span>
+              <span class="info-pill">Auto illustrations</span>
+              <span class="info-pill">Shuffle answers</span>
+            </div>
+            <p class="tiny">
+              Tip: hover character to preview; music toggled in settings.
+            </p>
+          </footer>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="settings" class="screen">
+        <div class="panel card">
+          <h2>Settings</h2>
+          <label class="lbl"
+            >Difficulty
+            <select id="level-select">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </label>
+
+          <label class="lbl toggle-row"
+            >Background Music
+            <input type="checkbox" id="music-toggle" checked />
+          </label>
+
+          <label class="lbl toggle-row"
+            >Sound Effects
+            <input type="checkbox" id="sfx-toggle" checked />
+          </label>
+
+          <div class="menu-actions">
+            <button id="start-game" class="btn primary">Play Now</button>
+            <button id="back-menu" class="btn ghost">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- CREDITS -->
+      <section id="credits" class="screen">
+        <div class="panel card">
+          <h2>Credits</h2>
+          <p class="lead">Design: You + Assistant — Futuristic anime theme</p>
+          <p class="small">
+            Illustrations and photos fetched from Unsplash (automatic)
+          </p>
+          <div class="menu-actions">
+            <button id="credits-back" class="btn ghost">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- GAME -->
+      <section id="game" class="screen">
+        <header class="hud card">
+          <div class="player-info">
+            <div id="hud-avatar" class="hud-avatar" aria-hidden></div>
+            <div class="player-meta">
+              <div id="hud-name" class="hud-name">Player</div>
+              <div id="hud-level" class="hud-level">Level: Easy</div>
+            </div>
+          </div>
+
+          <div class="hud-right">
+            <div id="hud-score" class="pill">Score: 0</div>
+            <div id="hud-progress" class="pill">1 / 10</div>
+          </div>
+        </header>
+
+        <main class="content-card card">
+          <aside class="img-panel">
+            <img id="q-image" alt="illustration" />
+            <div id="img-src" class="img-src">Illustration: Unsplash</div>
+          </aside>
+
+          <section class="question-panel">
+            <h2 id="q-text">Question appears here</h2>
+            <div id="choices" class="choices"></div>
+
+            <div class="controls">
+              <button id="next" class="btn" disabled>Next</button>
+              <button id="quit" class="btn ghost">Quit</button>
+            </div>
+          </section>
+        </main>
+      </section>
+
+      <!-- RESULT -->
+      <section id="result" class="screen">
+        <div class="panel card center-col">
+          <h2>Round Complete</h2>
+          <p id="result-text" class="lead">You scored 0 / 10</p>
+          <div class="menu-actions">
+            <button id="replay" class="btn primary">Play Again</button>
+            <button id="to-menu" class="btn ghost">Main Menu</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- sfx -->
+    <audio
+      id="s-correct"
+      src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"
+    ></audio>
+    <audio
+      id="s-wrong"
+      src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"
+    ></audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
